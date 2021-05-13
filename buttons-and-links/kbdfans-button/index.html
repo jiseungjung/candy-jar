@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KBDfans link</title>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital@1&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: rgb(56, 56, 56);
+        }
+
+        button {
+            color: white;
+            font-family: 'Josefin Sans', sans-serif;
+            background-color: #383838;
+            transition: transform 0.05s, box-shadow 0.05s;
+            margin-bottom: 5px;
+            border: 2px solid white;
+            box-shadow: 5px 5px 0 0 white;
+            min-height: 50px;
+            width: 250px;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+
+        button:active {
+            transform: translate(4px, 4px);
+            box-shadow: 1px 1px 0 0 white;
+        }
+
+        button span.running {
+            animation: pulse-fade 0.125s linear alternate infinite;
+        }
+
+        @keyframes pulse-fade {
+            to {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button>
+        <span data-text="loading">add to cart</span>
+    </button>
+    <script>
+        const button = document.querySelector('button')
+        const span = button.querySelector('span')
+
+        function handleClickAnimation() {
+            if (span.classList.contains('running')) return
+
+            animateButton()
+            window.setTimeout(animateButton, 1000)
+        }
+
+        function animateButton () {
+            const text = span.dataset.text
+            span.dataset.text = span.innerHTML
+            span.innerHTML = text
+            span.classList.contains('running') ? span.classList.remove('running') : span.classList.add('running')
+        }
+
+        button.addEventListener('click', handleClickAnimation)
+    </script>
+</body>
+</html>
